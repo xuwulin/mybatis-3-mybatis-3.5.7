@@ -28,7 +28,7 @@
   </settings>
 
 <!--  <plugins>
-    <plugin interceptor="com.itheima.interceptor.MyPlugin">
+    <plugin interceptor="com.xwl.interceptor.MyPlugin">
       <property name="someProperty" value="100"/>
     </plugin>
   </plugins>-->
@@ -51,9 +51,10 @@
 
   <!--第二部分：引入映射配置文件-->
   <mappers>
-    <!--<mapper resource="mapper/UserMapper.xml"></mapper>-->
-    <!--<mapper class="com.itheima.mapper.UserMapper"></mapper>-->
-    <package name="com.itheima.mapper"/>
+<!--    <mapper resource="mapper/UserMapper.xml"></mapper>-->
+    <!--<mapper class="com.xwl.mapper.UserMapper"></mapper>-->
+    <!-- 注意：package中的name是包名且必须和mapper.java文件所在的包名一致，要注意在resource下新建文件夹com\xwl\mapper，而不是新建com.xwl.mapper，新建的com.xwl.mapper整个文件夹名叫com.xwl.mapper -->
+    <package name="com.xwl.mapper"/>
 
   </mappers>
 

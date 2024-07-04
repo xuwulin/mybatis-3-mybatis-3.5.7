@@ -1,6 +1,6 @@
-package com.itheima.test;
+package com.xwl.test;
 
-import com.itheima.pojo.User;
+import com.xwl.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,7 +18,7 @@ public class CacheTest {
   @Test
   public void firstLevelCacheTest() throws IOException {
 
-    InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+    InputStream resourceAsStream = Resources.getResourceAsStream("mybatis-config.xml");
 
     // 2. (1)解析了配置文件，封装configuration对象 （2）创建了DefaultSqlSessionFactory工厂对象
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
@@ -28,17 +28,17 @@ public class CacheTest {
     SqlSession sqlSession = sqlSessionFactory.openSession();
 
     // 发起第一次查询，查询ID为1的用户
-    User user1 = sqlSession.selectOne("com.itheima.mapper.UserMapper.findByCondition", 1);
+    User user1 = sqlSession.selectOne("com.xwl.mapper.UserMapper.findByCondition", 1);
 
     // 更新操作
     User user = new User();
     user.setId(1);
     user.setUsername("tom");
-    sqlSession.update("com.itheima.mapper.UserMapper.updateUser",user);
+    sqlSession.update("com.xwl.mapper.UserMapper.updateUser", user);
     sqlSession.commit();
 
     // 发起第二次查询，查询ID为1的用户
-    User user2 = sqlSession.selectOne("com.itheima.mapper.UserMapper.findByCondition", 1);
+    User user2 = sqlSession.selectOne("com.xwl.mapper.UserMapper.findByCondition", 1);
 
     System.out.println(user1 == user2);
     System.out.println(user1);
@@ -56,7 +56,7 @@ public class CacheTest {
   @Test
   public void secondLevelCacheTest() throws IOException {
 
-    InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+    InputStream resourceAsStream = Resources.getResourceAsStream("mybatis-config.xml");
 
     // 2. (1)解析了配置文件，封装configuration对象 （2）创建了DefaultSqlSessionFactory工厂对象
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
@@ -67,7 +67,7 @@ public class CacheTest {
     SqlSession sqlSession2 = sqlSessionFactory.openSession();
 
     // 发起第一次查询，查询ID为1的用户
-    User user1 = sqlSession1.selectOne("com.itheima.mapper.UserMapper.findByCondition", 1);
+    User user1 = sqlSession1.selectOne("com.xwl.mapper.UserMapper.findByCondition", 1);
 
     // **必须要调用sqlSession的commit方法或者close方法，才能让二级缓存生效
     sqlSession1.commit();
@@ -78,13 +78,13 @@ public class CacheTest {
     user.setId(1);
     user.setUsername("tom");
 
-    sqlSession3.update("com.itheima.mapper.UserMapper.updateUser",user);
+    sqlSession3.update("com.xwl.mapper.UserMapper.updateUser", user);
     sqlSession3.commit();
 
     // 第二次查询
-    User user2 = sqlSession2.selectOne("com.itheima.mapper.UserMapper.findByCondition", 1);
+    User user2 = sqlSession2.selectOne("com.xwl.mapper.UserMapper.findByCondition", 1);
 
-    System.out.println(user1==user2);
+    System.out.println(user1 == user2);
     System.out.println(user1);
     System.out.println(user2);
 

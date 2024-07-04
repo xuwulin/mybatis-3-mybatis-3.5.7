@@ -20,7 +20,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.itheima.mapper.UserMapper">
+<mapper namespace="com.xwl.mapper.UserMapper">
 
   <!--type：cache使用的类型，默认是PerpetualCache，这在一级缓存中提到过。
       eviction： 定义回收的策略，常见的有FIFO，LRU。
@@ -32,11 +32,11 @@
   <cache></cache>
 
     <!--useCache默认值也是true-->
-    <select id="findByCondition" parameterType="int" resultType="com.itheima.pojo.User" useCache="true" >
+    <select id="findByCondition" parameterType="int" resultType="com.xwl.pojo.User" useCache="true" >
         SELECT id, username FROM  user WHERE id = #{id}
     </select>
 
-  <update id="updateUser" parameterType="com.itheima.pojo.User" >
+  <update id="updateUser" parameterType="com.xwl.pojo.User" >
         update user set username = #{username} where id = #{id}
   </update>
 

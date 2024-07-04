@@ -1,7 +1,6 @@
-package com.itheima.mapper;
+package com.xwl.mapper;
 
-import com.itheima.pojo.User;
-import org.apache.ibatis.annotations.Select;
+import com.xwl.pojo.User;
 
 public interface UserMapper {
 

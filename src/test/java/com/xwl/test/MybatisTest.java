@@ -13,9 +13,9 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.itheima.test;
-import com.itheima.mapper.UserMapper;
-import com.itheima.pojo.User;
+package com.xwl.test;
+import com.xwl.mapper.UserMapper;
+import com.xwl.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -35,7 +35,7 @@ public class MybatisTest {
   public void test1() throws IOException {
 
     // 1. 通过类加载器对配置文件进行加载，加载成了字节输入流，存到内存中 注意：配置文件并没有被解析
-    InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+    InputStream resourceAsStream = Resources.getResourceAsStream("mybatis-config.xml");
 
     // 2. (1)解析了配置文件，封装configuration对象 （2）创建了DefaultSqlSessionFactory工厂对象
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
@@ -45,7 +45,7 @@ public class MybatisTest {
     SqlSession sqlSession = sqlSessionFactory.openSession();
 
     // 4. 委派给Executor来执行，Executor执行时又会调用很多其他组件（参数设置、解析sql的获取，sql的执行、结果集的封装）
-    User user = sqlSession.selectOne("com.itheima.mapper.UserMapper.findByCondition", 1);
+    User user = sqlSession.selectOne("com.xwl.mapper.UserMapper.findByCondition", 1);
 
     System.out.println(user);
     System.out.println("MyBatis源码环境搭建成功....");
@@ -73,7 +73,7 @@ public class MybatisTest {
   public void test2() throws IOException {
 
     // 1. 通过类加载器对配置文件进行加载，加载成了字节输入流，存到内存中 注意：配置文件并没有被解析
-    InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+    InputStream resourceAsStream = Resources.getResourceAsStream("mybatis-config.xml");
 
     // 2. (1)解析了配置文件，封装configuration对象 （2）创建了DefaultSqlSessionFactory工厂对象
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
